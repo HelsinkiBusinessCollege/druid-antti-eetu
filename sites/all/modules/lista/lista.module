@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the lista feature.
+ */
+
+include_once 'lista.features.inc';
