@@ -1,0 +1,7 @@
+name = Ruokalista
+description = ruokalista
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = ruokalista
+features[features_api][] = api:2
