@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ *
+ * Block Class Wrap allows users to use any classes also in div wrapper/layers around block
+ * that was added using Block Class project.
+ *
+ * Using divwrapboat, divlayerbow, and divlayerstern to have unique class in each div element.
+ * Maybe it could be a form entry or a more elegant but way, but this will work for now:
+ *  <div class="divwrapboat">
+ *   <div class="divlayerbow></div>
+ *    ---- block content ---
+ *   <div class="divlayerstern"></div>
+ *  </div>
+ *
+ * Note it it does this for blocks using hook_block_view_alter() but unlike block_class 
+ * it may not yet for panels.
+ *
+ */
+
+
+// every block is going to use this run this view alter, with the if statement only the blocks
+// that have $block->css_class should have the div elements prefixed/suffixed.
+// maybe we could have used hook_block_view_MODULE_DELTA_alter() instead.
+function block_class_wrap_block_view_alter(&$data, $block) {
+ if (isset($block->css_class) && $block->css_class != '') {
+    if (is_array($data['content'])) {
+      $data['content']['#prefix'] = '<div class="divwrapboat ' . $block->css_class . '">';
+      $data['content']['#prefix'] .= '<div class="divlayerbow ' . $block->css_class . '"></div>';
+      $data['content']['#suffix'] = '<div class="divlayerstern ' . $block->css_class . '"></div></div>';
+    } else {
+      $data['content'] = '<div class="divwrapboat ' . $block->css_class . '">';
+      $data['content'] .= '<div class="divlayerbow ' . $block->css_class .'"></div>';
+      $data['content'] .=  $data['content'];
+      $data['content'] .= '<div class="divlayerstern ' . $block->css_class .'"></div></div>';
+    }
+ }
+}
+
+
