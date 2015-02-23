@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Lounaslista feature.
+ */
+
+include_once 'lounaslista.features.inc';
